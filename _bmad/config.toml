@@ -11,6 +11,6 @@
 # ─────────────────────────────────────────────────────────────────
 
 [core]
+project_name = "bmad-project"
 document_output_language = "繁體中文"
 output_folder = "{project-root}/_bmad-output"
-project_name = "bmad-project"
