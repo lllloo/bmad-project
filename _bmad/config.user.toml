@@ -12,3 +12,6 @@
 [core]
 user_name = "Barney"
 communication_language = "繁體中文"
+
+[modules.bmm]
+user_skill_level = "intermediate"
