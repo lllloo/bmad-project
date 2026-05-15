@@ -1,0 +1,23 @@
+# 全專案 LF line ending（避免 Windows CRLF 自動轉換在 Docker container / shell script / php / node tooling 觸發詭異問題）
+* text=auto eol=lf
+
+# 二進位檔不轉換
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+
+# Shell / linux artifacts 強制 LF
+*.sh text eol=lf
+Dockerfile text eol=lf
+*.dockerfile text eol=lf
+.env text eol=lf

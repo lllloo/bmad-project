@@ -1,0 +1,84 @@
+# W0 Spike — Minimal 4-service stack for tech-stack risk verification
+# 不是 production compose（不含 entrypoint auto-seed / healthcheck 完整化 / .env 範本——那些留 Story 1.4）
+# 目標：能 docker compose up 起來、能透過 http://localhost:8080 看到 frontend、能打 /api/auth/login
+
+services:
+  # ---- nginx 反代（同網域，AR9 約束） ----
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    container_name: bmad-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./backend:/var/www/backend:cached
+    depends_on:
+      - php-fpm
+      - node
+    networks:
+      - bmad
+
+  # ---- PHP-FPM（Laravel 12 backend） ----
+  php-fpm:
+    build:
+      context: ./docker/php-fpm
+      dockerfile: Dockerfile
+    container_name: bmad-php-fpm
+    volumes:
+      - ./backend:/var/www/backend:cached
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=bmad
+      - DB_USERNAME=bmad
+      - DB_PASSWORD=secret
+    depends_on:
+      - postgres
+    networks:
+      - bmad
+
+  # ---- PostgreSQL 17 ----
+  postgres:
+    build:
+      context: ./docker/postgres
+      dockerfile: Dockerfile
+    container_name: bmad-postgres
+    environment:
+      - POSTGRES_DB=bmad
+      - POSTGRES_USER=bmad
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      # spike 開出來方便 host 端 DBeaver / psql debug；正式版可移除
+      - "8543:5432"
+    networks:
+      - bmad
+
+  # ---- Node（Vite 8 dev server） ----
+  node:
+    build:
+      context: ./docker/node
+      dockerfile: Dockerfile
+    container_name: bmad-node
+    working_dir: /var/www/frontend
+    volumes:
+      - ./frontend:/var/www/frontend:cached
+      # node_modules 用 named volume 避開 Windows host file watcher 慢
+      - frontend_node_modules:/var/www/frontend/node_modules
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+    environment:
+      # Vite HMR 走 ws，host 模式由 nginx 反代轉發
+      - VITE_HMR_PROTOCOL=ws
+    networks:
+      - bmad
+
+volumes:
+  pg_data:
+  frontend_node_modules:
+
+networks:
+  bmad:
+    driver: bridge

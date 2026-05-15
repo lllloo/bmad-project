@@ -1,0 +1,2 @@
+# Claude Code harness 本地狀態（不應入 git）
+.claude/scheduled_tasks.lock
