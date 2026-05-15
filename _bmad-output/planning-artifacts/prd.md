@@ -37,6 +37,8 @@ lastEdited: '2026-05-15'
 editHistory:
   - date: '2026-05-15'
     changes: '主軸敘事從「練功 / 練手 / 教練表」改為「side project 起點」，11 處替換；不動 FR / NFR / scope / 技術細節'
+  - date: '2026-05-15'
+    changes: 'Top 3 polish from validation report：NFR19 主觀化修正、FR 章節加 technical starter kit disclaimer、FR2 與 FR29 微銳化（FR2 引用 NFR11、FR29 列具體容器數）'
 ---
 
 # Product Requirements Document - bmad-project
@@ -418,10 +420,12 @@ Phase 2 同步引入：線上 deploy、E2E（Playwright）、CI/CD（GitHub Acti
 
 **Capability Contract**：本節列出 MVP 必須具備的所有 capabilities。後續 UX 設計、Architecture、Epic / Story 拆解都只實作這裡列的；未列入則不會存在於最終產品。
 
+> **Disclaimer（technical starter kit 性質）**：本 PRD 為 technical starter kit。FR 中提及的技術元件（Docker stack、JWT token 結構、`spatie/laravel-permission`、Scribe、`bin/new-project.sh` 等）**屬於產品能力的必要描述，是 product surface 而非實作 leakage**。下游 Architecture 階段會繼續細化各元件的具體版本、配置與設計。
+
 ### Authentication & Identity
 
 - **FR1**：Visitor 可使用 email 與密碼註冊新帳號
-- **FR2**：System 在註冊成功時可發出單次使用、有期限的 email 驗證 token（MVP 階段寫入 log）
+- **FR2**：System 在註冊成功時可發出單次使用、有期限的 email 驗證 token（MVP 階段寫入 log；TTL 與單次使用規則見 NFR11）
 - **FR3**：未驗證使用者可以使用有效 token 完成 email 驗證
 - **FR4**：已驗證使用者可使用 email 與密碼登入
 - **FR5**：已認證使用者可登出，撤銷當前 session 的 refresh token
@@ -466,7 +470,7 @@ Phase 2 同步引入：線上 deploy、E2E（Playwright）、CI/CD（GitHub Acti
 
 ### Developer Experience (Fork & Onboarding)
 
-- **FR29**：Developer 可用單一 `docker compose up` 指令啟動完整 stack（nginx + php-fpm + postgres + node）
+- **FR29**：Developer 可用單一 `docker compose up` 指令啟動 nginx、php-fpm、postgres、node 四個容器並接通網路
 - **FR30**：System 在首次啟動時自動執行 seeders，產出三個預設角色與一個初始 admin 帳號
 - **FR31**：Developer 可執行 `bin/new-project.sh` 將本 starter fork 為新專案，互動式重新命名 namespace、port、DB、git remote
 - **FR32**：`bin/new-project.sh` 是冪等的（重複執行不會錯誤）
@@ -521,7 +525,7 @@ Phase 2 同步引入：線上 deploy、E2E（Playwright）、CI/CD（GitHub Acti
 ### Maintainability & Documentation
 
 - **NFR18**：Repository 包含至少 5 篇 ADR，涵蓋：JWT vs Sanctum、自寫 docker-compose vs Sail、PostgreSQL vs MySQL、RBAC 套件選擇（spatie/laravel-permission）、token 儲存策略
-- **NFR19**：README 提供 30 秒可讀完的 quickstart 段落（不含 Docker pull 時間）
+- **NFR19**：README 的 quickstart 段落字數 ≤ 200 字（不含 Docker pull 與 build 時間）
 
 ### Reusability
 
