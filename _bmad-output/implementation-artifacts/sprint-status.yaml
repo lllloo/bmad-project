@@ -1,0 +1,83 @@
+# generated: 2026-05-15
+# last_updated: 2026-05-15
+# project: bmad-project
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: {project-root}/_bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-05-15
+last_updated: 2026-05-15
+project: bmad-project
+project_key: NOKEY
+tracking_system: file-system
+story_location: "{project-root}/_bmad-output/implementation-artifacts"
+
+development_status:
+  # Epic 1: Walking Skeleton — Foundation + Authenticated Shell
+  epic-1: backlog
+  1-1-w0-spike-verify-tech-stack-risk-items-adr-foundation: backlog
+  1-2-backend-scaffold-bare-laravel-12-jwt-spatie-scribe-domain-boundary: backlog
+  1-3-frontend-scaffold-vite-react-19-tanstack-shadcn-anthropic-tokens: backlog
+  1-4-docker-compose-stack-nginx-reverse-proxy-4-containers-auto-seed-entrypoint: backlog
+  1-5-user-registration-with-email-verification-log: backlog
+  1-6-login-logout-with-jwt-access-in-memory-refresh-httponly-cookie: backlog
+  1-7-authenticated-shell-with-role-differentiated-sidebar-minimal-profile: backlog
+  epic-1-retrospective: optional
+
+  # Epic 2: Resilient Session — Token Lifecycle + Profile/Password
+  epic-2: backlog
+  2-1-refresh-token-rotation-with-atomic-blacklist: backlog
+  2-2-frontend-silent-refresh-with-401-concurrency-queue: backlog
+  2-3-forced-logout-with-return-url-preservation-friendly-recovery-ux: backlog
+  2-4-profile-update-password-change: backlog
+  2-5-password-reset-request-execution-single-use-token-24h-expiry: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: Admin Operations — Member Management + RBAC + Audit Trail
+  epic-3: backlog
+  3-1-member-list-with-search-pagination-sort-datatable-wrapper-empty-state: backlog
+  3-2-member-suspend-resume-with-confirmdestructive-auto-write-audit-observer: backlog
+  3-3-admin-password-reset-for-member-with-audit: backlog
+  3-4-role-assignment-with-spatie-cache-reset-audit-jwt-stateless: backlog
+  3-5-audit-log-browser-with-filter-pagination-auditdetailsheet-dark-navy-code-window: backlog
+  3-6-cmd-k-command-palette-for-quick-navigate-search-actions: backlog
+  3-7-four-empty-state-svg-illustrations-rolebadge-audit-display-variant: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Fork-Ready — Docs, Tests, Coverage + bin/new-project.sh
+  epic-4: backlog
+  4-1-scribe-api-docs-jwt-bearer-try-it-out-openapi-export: backlog
+  4-2-test-coverage-push-to-60-critical-path-suite-all-green: backlog
+  4-3-adr-closing-readme-quickstart-pitfalls-list: backlog
+  4-4-bin-new-project-sh-interactive-fork-script-with-dry-run-resume: backlog
+  4-5-cross-browser-a11y-test-matrix-performance-audit-stop-loss-check: backlog
+  epic-4-retrospective: optional
