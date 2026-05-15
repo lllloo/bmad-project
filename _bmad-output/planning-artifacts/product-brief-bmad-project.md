@@ -6,29 +6,29 @@ updated: "2026-05-15"
 inputs: []
 ---
 
-# Product Brief：一條刻意走冷門路線的全棧練功路徑 + AI-first 履歷骨架（暫名 bmad-project）
+# Product Brief：能撐住多個 side project 的 Laravel + React + AI starter kit（暫名 bmad-project）
 
 ## Executive Summary
 
-這不是「再寫一個後台 starter kit」，而是**一條刻意走冷門路線的全棧練功路徑**——透過親手實作一套 Laravel + React + AI-ready 的後台骨架，把 Inertia / Sanctum / Sail 這些「省事但抽掉學習價值」的便利選項全部換掉，逼自己面對 CORS、JWT token rotation、自寫 Docker 編排、RBAC API 設計這些**真正能寫進履歷與接案對話**的核心能力。
+這不是「再寫一個後台 starter kit」，而是**一份能撐住多個 side project 的 Laravel + React + AI-ready 骨架**——把 Inertia / Sanctum / Sail 這些「省事但抽掉設計權」的便利選項全部換掉，正面處理 CORS、JWT token rotation、自寫 Docker 編排、RBAC API 設計這些**真正會出現在實際 side project 與接案場景**的核心能力。
 
-第一階段：**MVP 是地基**，含三角色 RBAC、JWT 完整 token 流程（access + refresh rotation + 撤銷清單）、Admin / 會員雙端、Audit log、Scribe API 文件、Pest + Vitest 測試。第二階段：**AI 才是這份履歷的真正 punchline**——以 RAG 為 P0、Agent / Chat / 內容輔助 / NL→SQL 為 P1–P2，把 2026 後台基本功（pgvector / MCP / LLM 整合）一次練透。
+第一階段：**MVP 是地基**，含三角色 RBAC、JWT 完整 token 流程（access + refresh rotation + 撤銷清單）、Admin / 會員雙端、Audit log、Scribe API 文件、Pest + Vitest 測試。第二階段：**AI 才是這份 starter kit 的真正 punchline**——以 RAG 為 P0、Agent / Chat / 內容輔助 / NL→SQL 為 P1–P2，把 2026 後台基本功（pgvector / MCP / LLM 整合）直接灌進骨架，下一個 side project 就用得到。
 
-評估指標只看三件事：**學習回報率、可重用性、技術深度**。
+評估指標只看三件事：**side project 啟動速度、可重用性、技術深度**。
 
 ## The Problem
 
-問題不在「我需要一個後台」，而是「我需要一條完整的全棧練功路徑與可重用骨架」。
+問題不在「我需要一個後台」，而是「**我需要一個能讓我快速起 side project 的可重用骨架**」。
 
 現況痛點：
 
-- **Laravel 官方四個 starter kit 全是 Inertia / Sanctum 路線** — 一鍵能跑，但把 CORS、token、refresh、前後端版本化這些核心能力全抽掉，學完還是不會接純 React API。
+- **Laravel 官方四個 starter kit 全是 Inertia / Sanctum 路線** — 一鍵能跑，但把 CORS、token、refresh、前後端版本化這些核心能力全抽掉，要接純 React API 仍得從頭來。
 - **shadcn-admin 之類前端樣板沒有後端** — UI 漂亮，auth / RBAC / 文件全要自己接。
 - **Filament / Nova 走 Livewire / Vue Inertia** — 完全用不到 React 那邊的東西。
 - **網路教學多半是「JWT + Laravel + Vue」單一段落 demo** — 看完還是要自己把零件兜回去。
-- **每次起新 side project 都重新寫一次 auth、權限、Docker、文件** — 時間花在重複造輪子而非真正想練的主題（例如 AI）。
+- **每次起新 side project 都重新寫一次 auth、權限、Docker、文件** — 時間花在重複造輪子而非真正想做的東西（例如 AI）。
 
-代價：學習路徑零散、重複勞動、永遠停在「下次再認真做完」。
+代價：每個 side project 的前 1–2 週都耗在基礎建設、永遠停在「下次再認真做完」。
 
 ## The Solution
 
@@ -63,7 +63,7 @@ inputs: []
 
 **反 opinionated、追求 first principles** —— 三個被多數人選的便利選項，全部刻意拒絕：
 
-- **獨立 SPA 而非 Inertia** — 練到 CORS、token、refresh、版本化、跨服務 API 設計
+- **獨立 SPA 而非 Inertia** — 保留 CORS、token、refresh、版本化、跨服務 API 設計權與實作經驗
 - **JWT 而非 Sanctum** — 強迫面對無狀態認證全套設計（token 儲存、rotation、撤銷、CSRF/XSS 防護）
 - **自寫 docker-compose 而非 Sail** — 看穿 nginx fastcgi、php-fpm pool、postgres volume 每層
 - **PostgreSQL 而非 MySQL** — 配合第二階段 pgvector
@@ -117,7 +117,7 @@ inputs: []
 - `docker compose up` 一鍵啟動 + seeders auto-run
 - `bin/new-project.sh` 能在 < 5 分鐘內把這份 starter clone 成新專案骨架
 
-### 學習指標（個人 ROI — 可被驗證的 artifact）
+### Side Project Readiness（個人 ROI — 可被驗證的 artifact）
 
 - `docs/decisions/` 內 ≥ 5 篇 ADR（每篇 200–400 字），至少含：JWT vs Sanctum、自寫 compose vs Sail、PostgreSQL vs MySQL、RBAC 套件選擇、token 儲存策略
 - README 內附「踩過的坑」清單
@@ -134,7 +134,7 @@ inputs: []
 - ❌ `hasRole()` 撒在 controller 各處而非用 Policy / Gate
 - ❌ dev 環境跳過 nginx 反代直連 Vite（破壞 dev/prod parity）
 - ❌ 為了衝 60% 覆蓋率而排擠核心功能時間
-- ❌ 為了「全部都練」而做不完 MVP（最大風險）
+- ❌ 為了「全部都做」而做不完 MVP（最大風險）
 - ❌ 「先放 localStorage 之後再改」這種妥協
 
 ## Scope

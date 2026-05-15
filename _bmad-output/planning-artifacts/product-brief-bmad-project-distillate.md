@@ -10,7 +10,7 @@ purpose: "Token-efficient context for downstream PRD creation"
 
 ## Product Framing
 
-- 個人練手非商業專案；唯一使用者是開發者本人；無市場差異化目標，僅評估學習 ROI、可重用性、技術深度。
+- 個人 side project 起點（非商業專案）；唯一使用者是開發者本人；無市場差異化目標，僅評估 side project 啟動速度、可重用性、技術深度。
 - 核心哲學：**反 opinionated、追求 first principles**——刻意拒絕 Inertia / Sanctum / Sail / shadcn-admin（直接 fork）等省事路線。
 - 兩階段定位：**MVP 是地基，AI 是 punchline**（履歷重點）。
 
@@ -97,8 +97,8 @@ purpose: "Token-efficient context for downstream PRD creation"
 
 | 拒絕項 | 理由 |
 |---|---|
-| Sanctum cookie 模式 | 學習目的就是要練 JWT 無狀態全套設計 |
-| Inertia.js | 抽掉 CORS / token / SPA 學習價值 |
+| Sanctum cookie 模式 | side project 設計權核心就是 JWT 無狀態全套設計 |
+| Inertia.js | 抽掉 CORS / token / SPA 設計權與實作經驗 |
 | Laravel Sail | opinionated 黑盒；自寫 compose 才看穿每層 |
 | `tymon/jwt-auth` | 維護停滯；POSS fork 才是社群主力 |
 | MySQL | 為第二階段 pgvector 選 PostgreSQL |
